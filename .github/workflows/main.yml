@@ -27,4 +27,4 @@ jobs:
           run-fortran: 'TRUE'
           c-branch: ${{ matrix.cver }}
           fortran-branch: ${{ matrix.fver }}
-          c-compiler: ${{ matrix.container }}
+          c-compiler: ${{ matrix.compiler }}
