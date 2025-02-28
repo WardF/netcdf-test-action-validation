@@ -2,7 +2,7 @@
 # Run a docker-based test of tests.
 #
 # See https://github.com/Unidata/docker-nctests
-#     https://github.com/WardF/netcdf-test-action
+# How    https://github.com/WardF/netcdf-test-action
 
 on: [pull_request,workflow_dispatch]
 
@@ -24,7 +24,8 @@ jobs:
         uses: WardF/netcdf-test-action@v1
         with:
           run-c: 'TRUE'
+          c-compiler: '${{ matrix.compiler }}'
           run-fortran: 'TRUE'
-          c-branch: ${{ matrix.cver }}
-          fortran-branch: ${{ matrix.fver }}
-          c-compiler: ${{ matrix.compiler }}
+          c-branch: '${{ matrix.cver }}'
+          fortran-branch: '${{ matrix.fver }}'
+
