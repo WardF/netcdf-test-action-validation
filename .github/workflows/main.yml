@@ -1,0 +1,30 @@
+###
+# Run a docker-based test of tests.
+#
+# See https://github.com/Unidata/docker-nctests
+#     https://github.com/WardF/netcdf-test-action
+
+on: [pull_request,workflow_dispatch]
+
+permissions: {} 
+
+jobs:  
+  netcdf-tests:
+    name: Docker-Based NetCDF-C, Fortran Regression Testing
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cver: [ 'v4.9.2' ]
+        fver: [ 'v4.6.1' ]
+        compiler: [ 'gcc' ]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull and Run netCDF Regression Tests
+        uses: WardF/netcdf-test-action
+        with:
+          run-c: 'TRUE'
+          run-fortran: 'TRUE'
+          c-branch: ${{ matrix.cver }}
+          f-branch: ${{ matrix.fver }}
+          c-compiler: ${{ matrix.container }}
