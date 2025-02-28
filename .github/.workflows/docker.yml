@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Pull and Run netCDF Regression Tests
-        uses: WardF/netcdf-test-action
+        uses: WardF/netcdf-test-action@main
         with:
           run-c: 'TRUE'
           run-fortran: 'TRUE'
