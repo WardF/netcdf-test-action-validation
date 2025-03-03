@@ -18,9 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        cver: [ 'v4.9.2' ]
-        fver: [ 'v4.6.1' ]
-        compiler: [ 'gcc' ]
+        c-branch: [ 'v4.9.2' ]
+        fortran-branch: [ 'v4.6.1' ]
+        c-compiler: [ 'gcc', 'clang' ]
 
     steps:
       - uses: actions/checkout@v4
@@ -28,8 +28,8 @@ jobs:
         uses: WardF/netcdf-test-action@v1
         with:
           run-c: 'TRUE'
-          c-compiler: '${{ matrix.compiler }}'
+          c-compiler: '${{ matrix.c-compiler }}'
           run-fortran: 'TRUE'
-          c-branch: '${{ matrix.cver }}'
-          fortran-branch: '${{ matrix.fver }}'
+          c-branch: '${{ matrix.c-branch }}'
+          fortran-branch: '${{ matrix.fortran-branch }}'
 
