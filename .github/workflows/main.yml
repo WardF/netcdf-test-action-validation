@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        c-branch: [ 'v4.9.2' ]
+        c-branch: [ 'v4.9.0', 'v4.9.2' ]
         fortran-branch: [ 'v4.6.1' ]
         c-compiler: [ 'gcc', 'clang' ]
 
@@ -29,7 +29,7 @@ jobs:
         with:
           run-c: 'TRUE'
           c-compiler: '${{ matrix.c-compiler }}'
-          run-fortran: 'TRUE'
           c-branch: '${{ matrix.c-branch }}'
+          run-fortran: 'TRUE'
           fortran-branch: '${{ matrix.fortran-branch }}'
 
