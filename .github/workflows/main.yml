@@ -46,7 +46,7 @@ jobs:
     strategy:
       matrix:
         c-branch: [ 'v4.9.2' ]
-        h5ver: [ '1.12.1', '1.14.6' ]
+        h5ver: [ '1.14.6' ]
         fortran-branch: [ 'v4.6.1' ]
         c-compiler: [ 'mpicc' ]
         buildsystem: [ 'both' ]
