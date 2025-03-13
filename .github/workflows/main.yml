@@ -30,9 +30,10 @@ jobs:
         uses: WardF/netcdf-test-action@v1
         with:
           run-c: 'TRUE'
+          build-system: '${{ matrix.buildsystem }}'
+          hdf5-version: '${{ matrix.h5ver }}'
           c-compiler: '${{ matrix.c-compiler }}'
           c-branch: '${{ matrix.c-branch }}'
           run-fortran: 'TRUE'
           fortran-branch: '${{ matrix.fortran-branch }}'
-          build-system: '${{ matrix.buildsystem }}'
-          hdf5-version: '${{ matrix.h5ver }}'
+
