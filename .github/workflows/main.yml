@@ -21,7 +21,7 @@ jobs:
         c-branch: [ 'v4.9.0', 'v4.9.2' ]
         fortran-branch: [ 'v4.6.1' ]
         c-compiler: [ 'gcc', 'clang', 'mpicc' ]
-
+        buildsystem: [ 'cmake', 'autotools' ]
     steps:
       - uses: actions/checkout@v4
       - name: Pull and Run netCDF Regression Tests
@@ -32,5 +32,4 @@ jobs:
           c-branch: '${{ matrix.c-branch }}'
           run-fortran: 'TRUE'
           fortran-branch: '${{ matrix.fortran-branch }}'
-          use-ac: 'TRUE'
-          use-cmake: 'TRUE'
+          build-system: '${{ matrix.buildsystem }}'
