@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        c-branch: [ 'v4.9.0', 'v4.9.2' ]
+        c-branch: [ 'v4.9.2' ]
         h5ver: [ '1.12.1', '1.14.6' ]
         fortran-branch: [ 'v4.6.1' ]
         c-compiler: [ 'gcc', 'clang' ]
