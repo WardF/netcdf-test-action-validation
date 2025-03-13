@@ -13,8 +13,8 @@ concurrency:
 permissions: {} 
 
 jobs:  
-  netcdf-tests:
-    name: Docker-Based NetCDF-C, Fortran Regression Testing
+  netcdf-tests-serial:
+    name: Docker-Based NetCDF-C, Fortran Regression Testing (Serial)
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -37,3 +37,29 @@ jobs:
           run-fortran: 'TRUE'
           fortran-branch: '${{ matrix.fortran-branch }}'
 
+  netcdf-tests-parallel:
+
+    needs: netcdf-tests-serial
+
+    name: Docker-Based NetCDF-C, Fortran Regression Testing (Parallel)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        c-branch: [ 'v4.9.0', 'v4.9.2' ]
+        h5ver: [ '1.12.1', '1.14.6' ]
+        fortran-branch: [ 'v4.6.1' ]
+        c-compiler: [ 'mpicc' ]
+        buildsystem: [ 'both' ]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull and Run netCDF Regression Tests
+        uses: WardF/netcdf-test-action@v1
+        with:
+          run-c: 'TRUE'
+          build-system: '${{ matrix.buildsystem }}'
+          hdf5-version: '${{ matrix.h5ver }}'
+          c-compiler: '${{ matrix.c-compiler }}'
+          c-branch: '${{ matrix.c-branch }}'
+          run-fortran: 'TRUE'
+          fortran-branch: '${{ matrix.fortran-branch }}'
