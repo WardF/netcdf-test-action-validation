@@ -49,7 +49,7 @@ jobs:
         h5ver: [ '1.14.6' ]
         fortran-branch: [ 'v4.6.1' ]
         c-compiler: [ 'mpicc' ]
-        buildsystem: [ 'both' ]
+        buildsystem: [ 'cmake', 'autotools' ]
 
     steps:
       - uses: actions/checkout@v4
