@@ -37,8 +37,8 @@ jobs:
           c-branch: '${{ matrix.c-branch }}'
           run-fortran: 'TRUE'
           fortran-branch: '${{ matrix.fortran-branch }}'
-          cmake-c-options: '-DENABLE_HDF5=FALSE -DENABLE_NCZARR=FALSE -DENABLE_DAP_REMOTE_TESTS=OFF'
-          autotools-c-options: '--disable-hdf5 --disable-nczarr --disable-dap-remote-tests'
+          cmake-c-options: '-DENABLE_DAP_REMOTE_TESTS=OFF'
+          autotools-c-options: '--disable-dap-remote-tests'
 
   netcdf-tests-serial:
     name: Docker-Based NetCDF-C, Fortran Regression Testing (Serial)
