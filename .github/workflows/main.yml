@@ -72,7 +72,7 @@ jobs:
 
   netcdf-tests-parallel:
 
-    needs: netcdf-tests-serial
+    needs: [netcdf-tests-serial, netcdf-tests-oneoff]
 
     name: Docker-Based NetCDF-C, Fortran Regression Testing (Parallel)
     runs-on: ubuntu-latest
