@@ -13,6 +13,33 @@ concurrency:
 permissions: {} 
 
 jobs:  
+  netcdf-tests-oneoff:
+    name: Docker-based NetCDF-C, Fortran Regression Testing (One-Off Tests)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        c-branch: [ 'v4.9.3' ]
+        h5ver: [ '1.14.6' ]
+        fortran-branch: [ 'v4.6.2' ]
+        c-compiler: [ 'gcc' ]
+        buildsystem: [ 'both' ]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull and Run netCDF Regression Tests (One-Off)
+        uses: WardF/netcdf-test-action@v1
+        with:
+          run-c: 'TRUE'
+          build-system: '${{ matrix.buildsystem }}'
+          hdf5-version: '${{ matrix.h5ver }}'
+          ctest-repeat: 3
+          c-compiler: '${{ matrix.c-compiler }}'
+          c-branch: '${{ matrix.c-branch }}'
+          run-fortran: 'TRUE'
+          fortran-branch: '${{ matrix.fortran-branch }}'
+          cmake-c-options: '-DENABLE_HDF5=FALSE -DENABLE_NCZARR=FALSE -DENABLE_DAP_REMOTE_TESTS=OFF'
+          autotools-c-options: '--disable-hdf5 --disable-nczarr --disable-dap-remote-tests'
+
   netcdf-tests-serial:
     name: Docker-Based NetCDF-C, Fortran Regression Testing (Serial)
     runs-on: ubuntu-latest
@@ -23,6 +50,8 @@ jobs:
         fortran-branch: [ 'v4.6.1' ]
         c-compiler: [ 'gcc', 'clang' ]
         buildsystem: [ 'both' ]
+        cmake-c-ops: [ '-DENABLE_DAP_REMOTE_TESTS=OFF' ]
+        ac-c-ops: [ '--disable-dap-remote-tests' ]
 
     steps:
       - uses: actions/checkout@v4
@@ -35,8 +64,11 @@ jobs:
           ctest-repeat: 3
           c-compiler: '${{ matrix.c-compiler }}'
           c-branch: '${{ matrix.c-branch }}'
+          cmake-c-options: '${{ matrix.cmake-c-ops }}'
+          autotools-c-options: '${{ matrix.ac-c-ops }}'
           run-fortran: 'TRUE'
           fortran-branch: '${{ matrix.fortran-branch }}'
+
 
   netcdf-tests-parallel:
 
